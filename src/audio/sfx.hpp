@@ -14,32 +14,6 @@ namespace SFX {
 void Play(const std::string& sfx);
 
 /**
- * @brief Mutes or unmutes a sound effect.
- * @param sfx Path to the sound file.
- * @param mute True to mute, false to unmute
- */
-void SetMute(const std::string& sfx, bool mute);
-
-/**
- * @brief Checks if a sound effect is muted.
- * @param sfx Path to the sound file.
- * @return True if the sound effect is muted, false otherwise
- */
-bool IsMuted(const std::string& sfx);
-
-/**
- * @brief Starts looping a sound effect.
- * @param sfx Path to the sound file.
- */
-void StartLoop(const std::string& sfx);
-
-/**
- * @brief Stops looping a sound effect.
- * @param sfx Path to the sound file.
- */
-void StopLoop(const std::string& sfx);
-
-/**
  * @brief Stops all instances of a sound effect.
  * @param sfx Path to the sound file.
  */
