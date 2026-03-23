@@ -114,16 +114,16 @@ void PlayPitchVariance(const std::string &sfx, float variance) {
 
 void SetMute(const std::string &sfx, bool mute) {
   if (mute) {
-    mutedSounds.insert(sfx);
+    MUTED_SOUNDS.insert(sfx);
   } else {
-    mutedSounds.erase(sfx);
+    MUTED_SOUNDS.erase(sfx);
   }
 }
 
-bool IsMuted(const std::string &sfx) { return mutedSounds.find(sfx) != mutedSounds.end(); }
+bool IsMuted(const std::string &sfx) { return MUTED_SOUNDS.find(sfx) != MUTED_SOUNDS.end(); }
 
 void StartLoop(const std::string &sfx) {
-  if (loopingSounds.find(sfx) != loopingSounds.end()) {
+  if (LOOPING_SOUNDS.find(sfx) != LOOPING_SOUNDS.end()) {
     return;
   }
 
@@ -132,13 +132,13 @@ void StartLoop(const std::string &sfx) {
   }
 
   // Load sound if not in pool
-  if (soundPools.find(sfx) == soundPools.end()) {
+  if (SOUND_POOLS.find(sfx) == SOUND_POOLS.end()) {
     Sound baseSound = LoadSound(sfx.c_str());
-    soundPools[sfx] = std::vector<SoundInstance>();
-    soundPools[sfx].push_back({baseSound, false});
+    SOUND_POOLS[sfx] = std::vector<SoundInstance>();
+    SOUND_POOLS[sfx].push_back({baseSound, false});
   }
 
-  auto &pool = soundPools[sfx];
+  auto &pool = SOUND_POOLS[sfx];
 
   // Find free instance or create new one
   SoundInstance *freeInstance = nullptr;
@@ -161,22 +161,22 @@ void StartLoop(const std::string &sfx) {
     SetSoundVolume(freeInstance->sound, Settings::Get()->sfxVolume);
     PlaySound(freeInstance->sound);
     freeInstance->inUse = true;
-    loopingSounds[sfx] = freeInstance;
+    LOOPING_SOUNDS[sfx] = freeInstance;
   }
 }
 
 void StopLoop(const std::string &sfx) {
-  auto it = loopingSounds.find(sfx);
-  if (it != loopingSounds.end()) {
+  auto it = LOOPING_SOUNDS.find(sfx);
+  if (it != LOOPING_SOUNDS.end()) {
     StopSound(it->second->sound);
     it->second->inUse = false;
-    loopingSounds.erase(it);
+    LOOPING_SOUNDS.erase(it);
   }
 }
 
 void Stop(const std::string &sfx) {
-  auto it = soundPools.find(sfx);
-  if (it != soundPools.end()) {
+  auto it = SOUND_POOLS.find(sfx);
+  if (it != SOUND_POOLS.end()) {
     for (auto &instance : it->second) {
       if (IsSoundPlaying(instance.sound)) {
         StopSound(instance.sound);
@@ -188,27 +188,27 @@ void Stop(const std::string &sfx) {
 
 double Length(const std::string &sfx) {
   // Check cache first
-  auto cacheIt = soundLengthCache.find(sfx);
-  if (cacheIt != soundLengthCache.end()) {
+  auto cacheIt = SOUND_LENGTH_CACHE.find(sfx);
+  if (cacheIt != SOUND_LENGTH_CACHE.end()) {
     return cacheIt->second;
   }
 
   // Load sound if not in pool
-  if (soundPools.find(sfx) == soundPools.end()) {
+  if (SOUND_POOLS.find(sfx) == SOUND_POOLS.end()) {
     Sound baseSound = LoadSound(sfx.c_str());
-    soundPools[sfx] = std::vector<SoundInstance>();
-    soundPools[sfx].push_back({baseSound, false});
+    SOUND_POOLS[sfx] = std::vector<SoundInstance>();
+    SOUND_POOLS[sfx].push_back({baseSound, false});
   }
 
-  auto &pool = soundPools[sfx];
+  auto &pool = SOUND_POOLS[sfx];
   // Calculate length from frameCount (standard sample rate is 44100 Hz)
   double length = (double)pool[0].sound.frameCount / 44100.0;
-  soundLengthCache[sfx] = length;
+  SOUND_LENGTH_CACHE[sfx] = length;
   return length;
 }
 
 void Update() {
-  for (auto &[name, pool] : soundPools) {
+  for (auto &[name, pool] : SOUND_POOLS) {
     for (auto &instance : pool) {
       if (instance.inUse && !IsSoundPlaying(instance.sound)) {
         instance.inUse = false;
@@ -217,7 +217,7 @@ void Update() {
   }
 
   // Restart looping sounds that have finished
-  for (auto it = loopingSounds.begin(); it != loopingSounds.end();) {
+  for (auto it = LOOPING_SOUNDS.begin(); it != LOOPING_SOUNDS.end();) {
     if (!IsSoundPlaying(it->second->sound)) {
       SetSoundVolume(it->second->sound, Settings::Get()->sfxVolume);
       PlaySound(it->second->sound);
@@ -225,15 +225,15 @@ void Update() {
     ++it;
   }
 
-  playedThisFrame.clear();
+  PLAYED_THIS_FRAME.clear();
 }
 
 void Cleanup() {
   // Sound cache cleanup
-  for (auto &[name, pool] : soundPools) {
+  for (auto &[name, pool] : SOUND_POOLS) {
     // Only the first is the original, the rest are aliases
     UnloadSound(pool[0].sound);
   }
-  soundPools.clear();
+  SOUND_POOLS.clear();
 }
 }  // namespace SFX
