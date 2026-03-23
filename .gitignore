@@ -9,3 +9,5 @@ build*/
 .env
 temp/
 main
+
+*.dylib
