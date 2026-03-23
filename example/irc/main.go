@@ -604,9 +604,7 @@ func main() {
 	// renderConnect is single-pane; renderChat uses a three-pane layout.
 	// We switch layouts when the connection is established.
 	setupConnectLayout := func() {
-		ui.SetPaneLayout(stdui.VSplit([]*stdui.PaneNode{ //nolint:errcheck
-			stdui.Pane("main", 1),
-		}))
+		ui.SetPaneLayout(stdui.Pane("main"))   //nolint:errcheck
 		ui.UpdateContent(renderConnect(state)) //nolint:errcheck
 	}
 
