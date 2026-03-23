@@ -169,3 +169,7 @@ A Go SDK is available in the `sdk/go` directory. It provides a simple API for co
 <p align="center">
     <img src="./assets/screenshots/irc.png" alt="chat example">
 </p>
+
+## Found the project useful? :smiling_face_with_three_hearts:
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/A0A763FPT)
