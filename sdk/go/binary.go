@@ -3,8 +3,6 @@ package stdui
 import (
 	"archive/zip"
 	"bytes"
-	"crypto/sha256"
-	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -192,9 +190,6 @@ func EnsureBinary(binaryPath string, destDir string) error {
 	if err != nil {
 		return err
 	}
-
-	sum := sha256.Sum256(data)
-	_ = hex.EncodeToString(sum[:])
 
 	if err := extractReleaseZip(data, destDir); err != nil {
 		return err
