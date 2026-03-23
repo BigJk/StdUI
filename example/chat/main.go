@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/BigJk/stdui"
+	"github.com/BigJk/stdui/sdk/go"
 )
 
 // Message is a single chat message.

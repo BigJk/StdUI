@@ -8,7 +8,7 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/BigJk/stdui"
+	"github.com/BigJk/stdui/sdk/go"
 )
 
 // Priority levels for tasks.

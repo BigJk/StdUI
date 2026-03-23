@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/BigJk/stdui"
+	"github.com/BigJk/stdui/sdk/go"
 )
 
 const content = `

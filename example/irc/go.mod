@@ -1,9 +1,9 @@
-module github.com/BigJk/stdui/irc
+module github.com/BigJk/stdui/example/irc
 
 go 1.23.0
 
 require (
-	github.com/BigJk/stdui v0.0.0
+	github.com/BigJk/stdui/sdk/go v0.0.0
 	github.com/fluffle/goirc v1.3.4
 )
 
@@ -13,4 +13,5 @@ require (
 	golang.org/x/net v0.43.0 // indirect
 )
 
-replace github.com/BigJk/stdui => ../../sdk/go
+replace github.com/BigJk/stdui/sdk/go => ../../sdk/go
+

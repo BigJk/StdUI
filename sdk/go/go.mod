@@ -1,3 +1,4 @@
-module github.com/BigJk/stdui
+module github.com/BigJk/stdui/sdk/go
 
 go 1.21
+

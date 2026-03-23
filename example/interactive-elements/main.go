@@ -5,7 +5,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/BigJk/stdui"
+	"github.com/BigJk/stdui/sdk/go"
 )
 
 // FormState holds the current values of all interactive elements.

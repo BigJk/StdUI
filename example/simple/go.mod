@@ -1,7 +1,8 @@
-module stdui/simple
+module github.com/BigJk/stdui/example/simple
 
 go 1.21
 
-require github.com/BigJk/stdui v0.0.0
+require github.com/BigJk/stdui/sdk/go v0.0.0
 
-replace github.com/BigJk/stdui => ../../sdk/go
+replace github.com/BigJk/stdui/sdk/go => ../../sdk/go
+

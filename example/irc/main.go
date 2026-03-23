@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	stdui "github.com/BigJk/stdui"
+	stdui "github.com/BigJk/stdui/sdk/go"
 	irc "github.com/fluffle/goirc/client"
 )
 

@@ -154,7 +154,15 @@ That's the entire model. Every interaction follows this same pattern: send actio
 
 ### Go
 
-A Go SDK is available in the `sdk/go` directory. It provides a simple API for communicating with the StdUI process and reacting to user interactions. Usage examples can be found in the `./example` folder.
+A Go SDK is available in the `sdk/go` directory. It provides a simple API for communicating with the StdUI process and reacting to user interactions. Usage examples can be found in the `./example` folder. To install the Go SDK, run:
+
+```
+go get github.com/BigJk/stdui/sdk/go@latest
+```
+
+```go
+import stdui "github.com/BigJk/stdui/sdk/go"
+```
 
 ## Screenshots
 
