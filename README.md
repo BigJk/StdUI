@@ -5,10 +5,12 @@
 ---
 
 <p align="center">
-<i>An experimental lightweight language-agnostic cross-platform UI library</i>
+<i>An experimental lightweight language-agnostic cross-platform UI engine</i>
 </p>
 
-StdUI is a **lightweight cross-platform UI library** that can be used with any programming language. It's designed to be spawned as process and communicate with the main application via stdin/stdout. This allows for easy integration with various programming languages and frameworks. It supports a reduced sub-set of HTML/CSS for UI rendering. **No browser is involved.**
+_StdUI_ is a **lightweight cross-platform UI engine** that can be used with any programming language. It's designed to be spawned as process and communicate with the main application via stdin/stdout. This allows for easy integration with various programming languages and frameworks. It supports a reduced sub-set of HTML/CSS for UI rendering. **No browser is involved.**
+
+The goal is to provide a simple way to build native desktop applications with similar layout and style options to what you would expect from the web, but without the overhead of a full browser engine. It should also enable languages where UI libraries are rare. Its target use case is smaller applications with low to medium complexity that need a simple and easy UI.
 
 > [!WARNING]
 > This project is experimental. Expect bugs, missing features and breaking changes. The API is not stable and may change without deprecation. Use at your own risk.
@@ -26,7 +28,7 @@ StdUI is a **lightweight cross-platform UI library** that can be used with any p
   - Sliders
   - Progress bars
   - Color Picker
-- Display of images via `img` tag
+- Display of local images via `img` tag
 - Native file/folder dialogs
 - File drop support
 - Supports playing of sounds
@@ -37,8 +39,8 @@ StdUI is a **lightweight cross-platform UI library** that can be used with any p
 
 ## Examples
 
-- [Simple Example](./example/simple): Minimal example just showing the StdUI logo and a button
-- [Interactive Elements](.example/interactive-elements): Showcases all the built-in interactive widgets
+- [Simple](./example/simple): Minimal example just showing the StdUI logo and a button
+- [Interactive Elements](./example/interactive-elements): Showcases all the built-in interactive widgets
 - [Todo List](./example/todo): Simple todo list app
 - [Chat](./example/chat): Simple chat interface with message input and display (no real networking, just simulates a conversation)
 - [IRC Client](./example/irc): A working, but simple IRC client
@@ -59,12 +61,12 @@ Your App (Go, Python, anything)
         │  stdout ← JSON events
         ▼
    stdui binary (C++)
-   ┌──────────────────────────────┐
+   ┌-----------------------------─┐
    │  litehtml  — HTML/CSS layout │
    │  ImGui     — interactive     │
    │             widgets          │
    │  raylib    — window, audio   │
-   └──────────────────────────────┘
+   └------------------------------┘
 ```
 
 ### Startup
