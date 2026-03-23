@@ -14,9 +14,6 @@
 #include "settings.hpp"
 #include "ui/col.hpp"
 
-// If the env var UI_HIGHDPI is set, we're on a high DPI display.
-bool HighDPI() { return std::getenv("UI_HIGHDPI") != nullptr; }
-
 namespace UI::Style {
 namespace {
 constexpr float DEFAULT_BASE_FONT_SIZE = 20.0f;
