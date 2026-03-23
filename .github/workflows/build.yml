@@ -26,7 +26,7 @@ jobs:
             os: macos-14
             platform: macos
           - name: linux
-            os: ubuntu-latest
+            os: ubuntu-22.04
             platform: linux
 
     steps:
@@ -58,7 +58,8 @@ jobs:
             libxcursor-dev \
             libxi-dev \
             libxinerama-dev \
-            libxrandr-dev
+            libxrandr-dev \
+            pkg-config
 
       - name: Build (Windows)
         if: matrix.platform == 'windows'

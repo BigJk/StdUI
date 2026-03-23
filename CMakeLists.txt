@@ -106,6 +106,10 @@ elseif (UNIX)
     ${nativefiledialog_SOURCE_DIR}/src/nfd_common.c
     ${nativefiledialog_SOURCE_DIR}/src/nfd_gtk.c
   )
+  find_package(PkgConfig REQUIRED)
+  pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
+  target_include_directories(nativefiledialog PRIVATE ${GTK3_INCLUDE_DIRS})
+  target_link_libraries(nativefiledialog ${GTK3_LIBRARIES})
 endif()
 target_include_directories(nativefiledialog PUBLIC ${nativefiledialog_SOURCE_DIR}/src/include)
 
