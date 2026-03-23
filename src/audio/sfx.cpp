@@ -17,11 +17,11 @@ struct SoundInstance {
   Sound sound;
   bool inUse;
 };
-std::unordered_map<std::string, std::vector<SoundInstance>> soundPools;
-std::unordered_set<std::string> mutedSounds;
-std::unordered_map<std::string, SoundInstance *> loopingSounds;
-std::unordered_set<std::string> playedThisFrame;
-std::map<std::string, double> soundLengthCache;
+std::unordered_map<std::string, std::vector<SoundInstance>> SOUND_POOLS;
+std::unordered_set<std::string> MUTED_SOUNDS;
+std::unordered_map<std::string, SoundInstance *> LOOPING_SOUNDS;
+std::unordered_set<std::string> PLAYED_THIS_FRAME;
+std::map<std::string, double> SOUND_LENGTH_CACHE;
 const int MAX_SOUND_INSTANCES = 16;
 }  // namespace
 
@@ -30,19 +30,19 @@ void Play(const std::string &sfx) {
     return;
   }
 
-  auto [_, inserted] = playedThisFrame.insert(sfx);
+  auto [_, inserted] = PLAYED_THIS_FRAME.insert(sfx);
   if (!inserted) {
     return;
   }
 
   // Load sound if not in pool
-  if (soundPools.find(sfx) == soundPools.end()) {
+  if (SOUND_POOLS.find(sfx) == SOUND_POOLS.end()) {
     Sound baseSound = LoadSound((sfx).c_str());
-    soundPools[sfx] = std::vector<SoundInstance>();
-    soundPools[sfx].push_back({baseSound, false});
+    SOUND_POOLS[sfx] = std::vector<SoundInstance>();
+    SOUND_POOLS[sfx].push_back({baseSound, false});
   }
 
-  auto &pool = soundPools[sfx];
+  auto &pool = SOUND_POOLS[sfx];
 
   // Find free instance or create new one
   SoundInstance *freeInstance = nullptr;
@@ -73,18 +73,18 @@ void PlayPitchVariance(const std::string &sfx, float variance) {
     return;
   }
 
-  auto [_, inserted] = playedThisFrame.insert(sfx);
+  auto [_, inserted] = PLAYED_THIS_FRAME.insert(sfx);
   if (!inserted) {
     return;
   }
 
-  if (soundPools.find(sfx) == soundPools.end()) {
+  if (SOUND_POOLS.find(sfx) == SOUND_POOLS.end()) {
     Sound baseSound = LoadSound(sfx.c_str());
-    soundPools[sfx] = std::vector<SoundInstance>();
-    soundPools[sfx].push_back({baseSound, false});
+    SOUND_POOLS[sfx] = std::vector<SoundInstance>();
+    SOUND_POOLS[sfx].push_back({baseSound, false});
   }
 
-  auto &pool = soundPools[sfx];
+  auto &pool = SOUND_POOLS[sfx];
 
   SoundInstance *freeInstance = nullptr;
   for (auto &instance : pool) {
