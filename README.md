@@ -163,7 +163,47 @@ go get github.com/BigJk/stdui/sdk/go@latest
 ```
 
 ```go
-import stdui "github.com/BigJk/stdui/sdk/go"
+package main
+
+import (
+	"fmt"
+	"os"
+
+	stdui "github.com/BigJk/stdui/sdk/go"
+)
+
+func main() {
+	// If you don't want to download the binary yourself, you can use EnsureBinary to download the latest release
+	// from GitHub and place it in the working directory.
+	if err := stdui.EnsureBinary("", ""); err != nil {
+		panic(err)
+	}
+
+	client, err := stdui.Start("./stdui", stdui.Settings{
+		Title:        "Simple",
+		WindowWidth:  stdui.Ptr(700),
+		WindowHeight: stdui.Ptr(400),
+	})
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to start stdui: %v\n", err)
+		os.Exit(1)
+	}
+
+	client.OnReady(func() {
+		client.UpdateContent("Hello World") //nolint:errcheck
+	})
+
+	client.OnLog(func(namespace, message string) {
+		fmt.Fprintf(os.Stderr, "[log] %s: %s\n", namespace, message)
+	})
+
+	client.OnError(func(err error) {
+		fmt.Fprintf(os.Stderr, "[error] %v\n", err)
+	})
+
+	client.Wait()
+}
+
 ```
 
 ## Screenshots
