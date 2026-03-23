@@ -1,0 +1,125 @@
+name: Build
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: windows-msvc
+            os: windows-latest
+            platform: windows
+          - name: macos-intel
+            os: macos-15-intel
+            platform: macos
+          - name: macos-arm
+            os: macos-14
+            platform: macos
+          - name: linux
+            os: ubuntu-latest
+            platform: linux
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up CMake
+        uses: lukka/get-cmake@latest
+
+      - name: Set GIT_TAG
+        shell: bash
+        run: echo "GIT_TAG=${GITHUB_REF_NAME}" >> "$GITHUB_ENV"
+
+      - name: Fetch MSVC
+        if: matrix.platform == 'windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Install Linux build dependencies
+        if: matrix.platform == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libasound2-dev \
+            libgl1-mesa-dev \
+            libgtk-3-dev \
+            libx11-dev \
+            libxcursor-dev \
+            libxi-dev \
+            libxinerama-dev \
+            libxrandr-dev
+
+      - name: Build (Windows)
+        if: matrix.platform == 'windows'
+        shell: cmd
+        env:
+          GIT_TAG: ${{ env.GIT_TAG }}
+        run: build_release.bat
+
+      - name: Configure (macOS / Linux)
+        if: matrix.platform != 'windows'
+        run: |
+          cmake -S . -B build \
+            -Wno-dev \
+            -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_CXX_FLAGS="-DGIT_TAG=\\\"${{ env.GIT_TAG }}\\\""
+
+      - name: Build (macOS / Linux)
+        if: matrix.platform != 'windows'
+        run: cmake --build build --config Release
+
+      - name: Prepare release assets (Windows)
+        if: matrix.platform == 'windows'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path release | Out-Null
+          Copy-Item build/Release/stdui.exe release/stdui.exe
+          Compress-Archive -Path release/* -DestinationPath stdui-${{ matrix.name }}.zip
+
+      - name: Prepare release assets (macOS)
+        if: matrix.platform == 'macos'
+        run: |
+          mkdir -p release
+          cp libEGL.dylib libGLESv2.dylib release/
+          cp build/stdui release/stdui
+          zip -r "stdui-${{ matrix.name }}.zip" release
+
+      - name: Prepare release assets (Linux)
+        if: matrix.platform == 'linux'
+        run: |
+          mkdir -p release
+          cp build/stdui release/stdui
+          zip -r "stdui-${{ matrix.name }}.zip" release
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: stdui-${{ matrix.name }}
+          path: stdui-${{ matrix.name }}.zip
+
+  release:
+    name: Create GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/**/*.zip

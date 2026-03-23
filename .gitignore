@@ -1,0 +1,11 @@
+imgui.ini
+settings.hson
+log.txt
+window_states.ini
+
+build*/
+.cache/
+.aider*
+.env
+temp/
+main

@@ -1,0 +1,10 @@
+go 1.25.5
+
+use (
+	./example/chat
+	./example/interactive-elements
+	./example/irc
+	./example/simple
+	./example/todo
+	./sdk/go
+)
