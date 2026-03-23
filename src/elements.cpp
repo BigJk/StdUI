@@ -1,5 +1,6 @@
 #include "elements.hpp"
 
+#include <algorithm>
 #include <functional>
 #include <map>
 #include <sstream>
