@@ -28,6 +28,7 @@ StdUI is a **lightweight cross-platform UI library** that can be used with any p
   - Color Picker
 - Display of images via `img` tag
 - Native file/folder dialogs
+- File drop support
 - Supports playing of sounds
 - Clipboard text access
 - Notification toasts
@@ -36,9 +37,10 @@ StdUI is a **lightweight cross-platform UI library** that can be used with any p
 
 ## Examples
 
+- [Simple Example](./example/simple): Minimal example just showing the StdUI logo and a button
+- [Interactive Elements](.example/interactive-elements): Showcases all the built-in interactive widgets
 - [Todo List](./example/todo): Simple todo list app
 - [Chat](./example/chat): Simple chat interface with message input and display (no real networking, just simulates a conversation)
-- [Simple Example](./example/simple): Minimal example just showing the StdUI logo and a button
 - [IRC Client](./example/irc): A working, but simple IRC client
 
 All these examples are based on the Go SDK.
