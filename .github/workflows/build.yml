@@ -66,7 +66,7 @@ jobs:
         shell: cmd
         env:
           GIT_TAG: ${{ env.GIT_TAG }}
-        run: build_release.bat
+        run: build.bat
 
       - name: Configure (macOS / Linux)
         if: matrix.platform != 'windows'
