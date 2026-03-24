@@ -222,6 +222,17 @@ func main() {
 
 ```
 
+## Credits
+
+This project is built on top of several excellent libraries:
+
+- **[raylib](https://github.com/raysan5/raylib)** - Simple and easy-to-use library for video games and graphics
+- **[litehtml](https://github.com/litehtml/litehtml)** - Lightweight HTML/CSS layout rendering engine
+- **[ImGui](https://github.com/ocornut/imgui)** - Immediate mode GUI library for interactive widgets
+- **[ImHTML](https://github.com/BigJk/ImHTML)** - ImGui extension for rendering HTML
+- **[hjson](https://github.com/hjson/hjson-cpp)** - Human-friendly JSON format parser
+- **[Native File Dialog](https://github.com/mlabbe/nativefiledialog)** - Cross-platform file/folder dialog library
+
 ## Found the project useful? :smiling_face_with_three_hearts:
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/A0A763FPT)
