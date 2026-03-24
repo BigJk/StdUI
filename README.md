@@ -37,6 +37,20 @@ The goal is to provide a simple way to build native desktop applications with si
 - ~5MB binary size
 - ...
 
+## Screenshots
+
+<p align="center">
+    <img src="./assets/screenshots/todo.png" alt="todo example">
+</p>
+
+<p align="center">
+    <img src="./assets/screenshots/chat.png" alt="chat example">
+</p>
+
+<p align="center">
+    <img src="./assets/screenshots/irc.png" alt="chat example">
+</p>
+
 ## Examples
 
 - [Simple](./example/simple): Minimal example just showing the StdUI logo and a button
@@ -207,20 +221,6 @@ func main() {
 }
 
 ```
-
-## Screenshots
-
-<p align="center">
-    <img src="./assets/screenshots/todo.png" alt="todo example">
-</p>
-
-<p align="center">
-    <img src="./assets/screenshots/chat.png" alt="chat example">
-</p>
-
-<p align="center">
-    <img src="./assets/screenshots/irc.png" alt="chat example">
-</p>
 
 ## Found the project useful? :smiling_face_with_three_hearts:
 
