@@ -5,7 +5,7 @@
 ---
 
 <p align="center">
-<i>An experimental lightweight language-agnostic cross-platform UI engine</i>
+<i>An experimental lightweight language-agnostic cross-platform UI engine — <a href="https://bigjk.github.io/StdUI/docs/intro">Check out the docs!</a></i>
 </p>
 
 _StdUI_ is a **lightweight cross-platform UI engine** that can be used with any programming language. It's designed to be spawned as process and communicate with the main application via stdin/stdout. This allows for easy integration with various programming languages and frameworks. It supports a reduced sub-set of HTML/CSS for UI rendering. **No browser is involved.**
