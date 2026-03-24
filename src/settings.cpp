@@ -17,7 +17,7 @@ void Load(Hjson::Value root) {
   settingsData.windowMaxHeight = root["windowMaxHeight"].defined() ? root["windowMaxHeight"].to_int64() : 2160;
   settingsData.baseFontSize = root["baseFontSize"].defined() ? root["baseFontSize"].to_double() : 16.0f;
   settingsData.targetFps = root["targetFps"].defined() ? root["targetFps"].to_int64() : 60;
-  settingsData.sfxVolume = root["sfxVolume"].defined() ? root["sfxVolume"].to_double() : 1.0f;
+  settingsData.audioVolume = root["audioVolume"].defined() ? root["audioVolume"].to_double() : 1.0f;
   settingsData.fontRegular = root["fontRegular"].defined() ? root["fontRegular"].to_string() : "";
   settingsData.fontBold = root["fontBold"].defined() ? root["fontBold"].to_string() : "";
   settingsData.fontItalic = root["fontItalic"].defined() ? root["fontItalic"].to_string() : "";

@@ -3,10 +3,10 @@
 #include <string>
 
 /**
- * @namespace SFX
+ * @namespace Audio
  * @brief Sound effect system
  */
-namespace SFX {
+namespace Audio {
 /**
  * @brief Plays a sound effect.
  * @param sfx Absolute or relative path to the sound file.
@@ -37,4 +37,4 @@ void Update();
  * Should be called before the program exits.
  */
 void Cleanup();
-}  // namespace SFX
+}  // namespace Audio

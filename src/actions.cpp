@@ -6,7 +6,7 @@
 #include <unordered_map>
 
 #include "action.hpp"
-#include "audio/sfx.hpp"
+#include "audio.hpp"
 #include "hjson.h"
 #include "io.hpp"
 #include "layout.hpp"
@@ -258,7 +258,7 @@ bool Process() {
            file = data["file"].to_string();
          }
          if (!file.empty()) {
-           SFX::Play(file);
+           Audio::Play(file);
          }
        }},
 
@@ -274,7 +274,7 @@ bool Process() {
          }
          if (volume < 0.0f) volume = 0.0f;
          if (volume > 1.0f) volume = 1.0f;
-         Settings::Get()->sfxVolume = volume;
+         Settings::Get()->audioVolume = volume;
        }},
 
       {"confirm",

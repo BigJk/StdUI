@@ -1,4 +1,4 @@
-#include "sfx.hpp"
+#include "audio.hpp"
 
 #include <filesystem>
 #include <map>
@@ -11,7 +11,7 @@
 #include "raylib.h"
 #include "settings.hpp"
 
-namespace SFX {
+namespace Audio {
 namespace {
 struct SoundInstance {
   Sound sound;
@@ -57,7 +57,7 @@ void Play(const std::string &sfx) {
 
   // If we found or created a free instance, play it
   if (freeInstance) {
-    SetSoundVolume(freeInstance->sound, Settings::Get()->sfxVolume);
+    SetSoundVolume(freeInstance->sound, Settings::Get()->audioVolume);
     PlaySound(freeInstance->sound);
     freeInstance->inUse = true;
   }
@@ -108,7 +108,7 @@ void Update() {
   // Restart looping sounds that have finished
   for (auto it = LOOPING_SOUNDS.begin(); it != LOOPING_SOUNDS.end();) {
     if (!IsSoundPlaying(it->second->sound)) {
-      SetSoundVolume(it->second->sound, Settings::Get()->sfxVolume);
+      SetSoundVolume(it->second->sound, Settings::Get()->audioVolume);
       PlaySound(it->second->sound);
     }
     ++it;
@@ -125,4 +125,4 @@ void Cleanup() {
   }
   SOUND_POOLS.clear();
 }
-}  // namespace SFX
+}  // namespace Audio

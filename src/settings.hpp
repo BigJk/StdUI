@@ -20,7 +20,7 @@ struct Data {
   int windowMaxWidth;                  ///< Maximum window width in pixels
   int windowMaxHeight;                 ///< Maximum window height in pixels
   int targetFps;                       ///< Target frame rate in frames per second
-  float sfxVolume;                     ///< Sound effects volume level
+  float audioVolume;                   ///< Sound effects volume level
   float baseFontSize;                  ///< Base font size in pixels
   std::string fontRegular;             ///< Filename of the regular font
   std::string fontBold;                ///< Filename of the bold font

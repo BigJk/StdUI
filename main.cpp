@@ -10,7 +10,7 @@
 #include "rlImGui.h"
 
 // Subsystems
-#include "audio/sfx.hpp"
+#include "audio.hpp"
 #include "elements.hpp"
 #include "renderer.hpp"
 #include "settings.hpp"
@@ -135,7 +135,7 @@ int main() {
   //
   // Cleanup.
   //
-  SFX::Cleanup();
+  Audio::Cleanup();
   rlImGuiShutdown();
   CloseWindow();
 

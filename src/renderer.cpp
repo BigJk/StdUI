@@ -4,7 +4,7 @@
 #include <string>
 
 #include "actions.hpp"
-#include "audio/sfx.hpp"
+#include "audio.hpp"
 #include "hjson.h"
 #include "imgui.h"
 #include "imhtml.hpp"
@@ -229,7 +229,7 @@ void MainLoopIteration() {
   //
   // Audio
   //
-  SFX::Update();
+  Audio::Update();
 
   //
   // Sync ImHTML base font size — must be set before ImHTML::Canvas().

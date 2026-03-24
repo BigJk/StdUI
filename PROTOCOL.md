@@ -52,7 +52,7 @@ All fields are optional and only provided fields will be updated.
 - **`windowMaxWidth`** _(number)_ — Maximum allowed window width in pixels. Defaults to `3840`.
 - **`windowMaxHeight`** _(number)_ — Maximum allowed window height in pixels. Defaults to `2160`.
 - **`baseFontSize`** _(number)_ — Base UI font size in pixels. Defaults to `16.0`.
-- **`sfxVolume`** _(number)_ — Sound effects volume level (0.0 to 1.0). Defaults to `1.0`.
+- **`audioVolume`** _(number)_ — Audio volume level (0.0 to 1.0). Defaults to `1.0`.
 - **`fontRegular`** _(string)_ — Filename of the regular font file. Defaults to `""` (use imgui default).
 - **`fontBold`** _(string)_ — Filename of the bold font file. Defaults to `""` (use imgui default).
 - **`fontItalic`** _(string)_ — Filename of the italic font file. Defaults to `""` (use imgui default).
@@ -70,7 +70,7 @@ All fields are optional and only provided fields will be updated.
     "windowWidth": 1280,
     "windowHeight": 720,
     "baseFontSize": 14,
-    "sfxVolume": 0.5,
+    "audioVolume": 0.5,
     "resizable": true
   }
 }
@@ -518,7 +518,7 @@ Moves the window to the given screen coordinates.
 
 ### `play-sound` _(controlling app → stdui)_
 
-Plays a sound file through stdui's audio system (respects the `sfxVolume` setting).
+Plays a sound file through stdui's audio system (respects the `audioVolume` setting).
 The `data` field is the path to the sound file — absolute or relative to the stdui working directory.
 
 ```json
@@ -691,58 +691,58 @@ Registers a set of keyboard shortcuts. Calling this action replaces any previous
 {
   "action": "set-keybinds",
   "data": [
-    { "id": "save",      "key": "s",      "ctrl": true },
-    { "id": "find",      "key": "f",      "ctrl": true },
-    { "id": "quit",      "key": "q",      "ctrl": true },
-    { "id": "help",      "key": "f1" },
-    { "id": "fullscreen","key": "f11" },
-    { "id": "new-item",  "key": "n",      "ctrl": true, "shift": true }
+    { "id": "save", "key": "s", "ctrl": true },
+    { "id": "find", "key": "f", "ctrl": true },
+    { "id": "quit", "key": "q", "ctrl": true },
+    { "id": "help", "key": "f1" },
+    { "id": "fullscreen", "key": "f11" },
+    { "id": "new-item", "key": "n", "ctrl": true, "shift": true }
   ]
 }
 ```
 
 **Fields (per entry in `data` array):**
 
-| Field   | Required | Description                                                                        |
-| ------- | -------- | ---------------------------------------------------------------------------------- |
-| `id`    | yes      | Application-defined identifier echoed back in `key-pressed`.                       |
-| `key`   | yes      | Primary key name (case-insensitive). See [Key Names](#key-names) below.            |
-| `ctrl`  | no       | Require Ctrl (left or right) to be held. Defaults to `false`.                      |
-| `shift` | no       | Require Shift (left or right) to be held. Defaults to `false`.                     |
-| `alt`   | no       | Require Alt (left or right) to be held. Defaults to `false`.                       |
-| `meta`  | no       | Require Super / Cmd (left or right) to be held. Defaults to `false`.               |
+| Field   | Required | Description                                                             |
+| ------- | -------- | ----------------------------------------------------------------------- |
+| `id`    | yes      | Application-defined identifier echoed back in `key-pressed`.            |
+| `key`   | yes      | Primary key name (case-insensitive). See [Key Names](#key-names) below. |
+| `ctrl`  | no       | Require Ctrl (left or right) to be held. Defaults to `false`.           |
+| `shift` | no       | Require Shift (left or right) to be held. Defaults to `false`.          |
+| `alt`   | no       | Require Alt (left or right) to be held. Defaults to `false`.            |
+| `meta`  | no       | Require Super / Cmd (left or right) to be held. Defaults to `false`.    |
 
 To clear all keybinds, send an empty array: `{ "action": "set-keybinds", "data": [] }`.
 
 #### Key Names
 
-Single characters are accepted as-is: `"a"`–`"z"`, `"0"`–`"9"`, `"/"`, `","`, `"."`, `"-"`, `"="`, `";"`, `"'"`, `"["`, `"]"`, `"\\"`, `` "`" ``.
+Single characters are accepted as-is: `"a"`–`"z"`, `"0"`–`"9"`, `"/"`, `","`, `"."`, `"-"`, `"="`, `";"`, `"'"`, `"["`, `"]"`, `"\\"`, ``"`"``.
 
 Named keys:
 
-| Name           | Key              |
-| -------------- | ---------------- |
-| `space`        | Space bar        |
-| `enter` / `return` | Enter        |
-| `tab`          | Tab              |
-| `backspace`    | Backspace        |
-| `delete` / `del` | Delete         |
-| `insert`       | Insert           |
-| `escape` / `esc` | Escape         |
-| `left`         | Arrow left       |
-| `right`        | Arrow right      |
-| `up`           | Arrow up         |
-| `down`         | Arrow down       |
-| `home`         | Home             |
-| `end`          | End              |
-| `pageup`       | Page Up          |
-| `pagedown`     | Page Down        |
-| `capslock`     | Caps Lock        |
-| `scrolllock`   | Scroll Lock      |
-| `numlock`      | Num Lock         |
-| `printscreen`  | Print Screen     |
-| `pause`        | Pause            |
-| `f1`–`f12`     | Function keys    |
+| Name               | Key           |
+| ------------------ | ------------- |
+| `space`            | Space bar     |
+| `enter` / `return` | Enter         |
+| `tab`              | Tab           |
+| `backspace`        | Backspace     |
+| `delete` / `del`   | Delete        |
+| `insert`           | Insert        |
+| `escape` / `esc`   | Escape        |
+| `left`             | Arrow left    |
+| `right`            | Arrow right   |
+| `up`               | Arrow up      |
+| `down`             | Arrow down    |
+| `home`             | Home          |
+| `end`              | End           |
+| `pageup`           | Page Up       |
+| `pagedown`         | Page Down     |
+| `capslock`         | Caps Lock     |
+| `scrolllock`       | Scroll Lock   |
+| `numlock`          | Num Lock      |
+| `printscreen`      | Print Screen  |
+| `pause`            | Pause         |
+| `f1`–`f12`         | Function keys |
 
 ### `key-pressed` _(stdui → controlling app)_
 
