@@ -8,7 +8,7 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/BigJk/stdui/sdk/go"
+	stdui "github.com/BigJk/stdui/sdk/go"
 )
 
 // Priority levels for tasks.
@@ -244,7 +244,7 @@ func renderActions(state AppState) string {
   </div>
   <div class="field">
     <span class="field-label">Priority</span>
-    <ui-select id="new-priority" options="Low,Medium,High" value="%s"></ui-select>
+    <ui-select id="new-priority" options="Low|Medium|High" value="%s"></ui-select>
   </div>
   <ui-button id="btn-add-task" text="Add Task" action="add-task" tooltip="Add a new task"></ui-button>
 </div>
