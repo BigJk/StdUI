@@ -40,10 +40,10 @@ stdui → App   {"action":"window-closed"}
 
 ## Sections
 
-- [**Core Actions**](./actions) — `settings`, `update-content`, lifecycle events
-- [**Interactive Elements**](./elements/) — all `<ui-*>` tags
-- [**Element Actions**](./element-actions) — `set-value`, `get-value`, `input-changed`, `button-clicked`
-- [**Window Control**](./window) — title, icon, position, minimize/maximize, toast, clipboard
-- [**Keybinds**](./keybinds) — `set-keybinds`, `key-pressed`
-- [**Scroll Control**](./scroll) — `scroll-to`
-- [**Pane Layout**](./pane-layout) — `set-pane-layout`
+- [**Core Actions**](/docs/protocol/actions) — `settings`, `update-content`, lifecycle events
+- [**Interactive Elements**](/docs/protocol/elements/) — all `<ui-*>` tags
+- [**Element Actions**](/docs/protocol/element-actions) — `set-value`, `get-value`, `input-changed`, `button-clicked`
+- [**Window Control**](/docs/protocol/window) — title, icon, position, minimize/maximize, toast, clipboard
+- [**Keybinds**](/docs/protocol/keybinds) — `set-keybinds`, `key-pressed`
+- [**Scroll Control**](/docs/protocol/scroll) — `scroll-to`
+- [**Pane Layout**](/docs/protocol/pane-layout) — `set-pane-layout`

@@ -4,7 +4,7 @@ sidebar_position: 11
 
 # `<ui-folder-select>`
 
-Same as [`<ui-file-select>`](./file-select) but opens a native folder-picker dialog instead of a file dialog.
+Same as [`<ui-file-select>`](/docs/protocol/elements/file-select) but opens a native folder-picker dialog instead of a file dialog.
 
 ```html
 <ui-folder-select id="output-dir" label="Browse..." value=""></ui-folder-select>
@@ -20,4 +20,4 @@ Same as [`<ui-file-select>`](./file-select) but opens a native folder-picker dia
 
 ## Event
 
-Emits [`input-changed`](../element-actions#input-changed) with the selected absolute folder path as the value.
+Emits [`input-changed`](/docs/protocol/element-actions#input-changed) with the selected absolute folder path as the value.

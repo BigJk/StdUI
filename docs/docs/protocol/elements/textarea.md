@@ -23,4 +23,4 @@ A multi-line text editor. Supports **Tab** for indentation; **Enter** inserts a 
 
 ## Event
 
-Emits [`input-changed`](../element-actions#input-changed) on focus loss (default), or on every keystroke when `live="true"`.
+Emits [`input-changed`](/docs/protocol/element-actions#input-changed) on focus loss (default), or on every keystroke when `live="true"`.

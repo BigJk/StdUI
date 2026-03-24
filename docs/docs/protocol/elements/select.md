@@ -20,4 +20,4 @@ A dropdown selector rendered by ImGui.
 
 ## Event
 
-Emits [`input-changed`](../element-actions#input-changed) immediately on selection change.
+Emits [`input-changed`](/docs/protocol/element-actions#input-changed) immediately on selection change.

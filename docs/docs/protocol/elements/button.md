@@ -20,7 +20,7 @@ A clickable button rendered by ImGui.
 
 ## Event
 
-Emits [`button-clicked`](../element-actions#button-clicked) when clicked. The event `data` contains all HTML attributes of the button plus a `pane` field.
+Emits [`button-clicked`](/docs/protocol/element-actions#button-clicked) when clicked. The event `data` contains all HTML attributes of the button plus a `pane` field.
 
 ```json
 { "action": "button-clicked", "data": { "action": "my-action", "text": "Click Me", "pane": "main" } }

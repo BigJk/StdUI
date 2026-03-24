@@ -20,4 +20,4 @@ A toggle checkbox with an optional label.
 
 ## Event
 
-Emits [`input-changed`](../element-actions#input-changed) immediately on toggle. Value is `"true"` or `"false"`.
+Emits [`input-changed`](/docs/protocol/element-actions#input-changed) immediately on toggle. Value is `"true"` or `"false"`.

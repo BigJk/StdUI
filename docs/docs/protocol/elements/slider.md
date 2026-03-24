@@ -24,4 +24,4 @@ A horizontal slider for float or integer values.
 
 ## Event
 
-Emits [`input-changed`](../element-actions#input-changed) on mouse release. The emitted value is an integer string when `type="int"`, a float string otherwise.
+Emits [`input-changed`](/docs/protocol/element-actions#input-changed) on mouse release. The emitted value is an integer string when `type="int"`, a float string otherwise.

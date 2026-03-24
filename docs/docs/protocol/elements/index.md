@@ -9,24 +9,24 @@ Interactive elements are custom HTML tags rendered by ImGui. They use the `ui-` 
 
 ## State
 
-Each element requires an `id` attribute used to track state and identify events. State is seeded from the `value` / `checked` attribute on first render and persisted internally until changed by the user or overridden via a [`set-value`](../element-actions#set-value) action.
+Each element requires an `id` attribute used to track state and identify events. State is seeded from the `value` / `checked` attribute on first render and persisted internally until changed by the user or overridden via a [`set-value`](/docs/protocol/element-actions#set-value) action.
 
 ## Events
 
-Most elements emit [`input-changed`](../element-actions#input-changed) when their value changes. Buttons emit [`button-clicked`](../element-actions#button-clicked).
+Most elements emit [`input-changed`](/docs/protocol/element-actions#input-changed) when their value changes. Buttons emit [`button-clicked`](/docs/protocol/element-actions#button-clicked).
 
 ## Elements
 
 | Element | Description |
 | ------- | ----------- |
-| [`<ui-button>`](./button) | Clickable button |
-| [`<ui-input>`](./input) | Text, number, int, or password input field |
-| [`<ui-select>`](./select) | Dropdown selector |
-| [`<ui-slider>`](./slider) | Float or integer slider |
-| [`<ui-checkbox>`](./checkbox) | Toggle checkbox |
-| [`<ui-textarea>`](./textarea) | Multi-line text editor |
-| [`<ui-progress>`](./progress) | Read-only progress bar |
-| [`<ui-color>`](./color) | Inline color picker |
-| [`<ui-file-select>`](./file-select) | Native file-open dialog |
-| [`<ui-folder-select>`](./folder-select) | Native folder-picker dialog |
-| [`<ui-file-save>`](./file-save) | Native file-save dialog |
+| [`<ui-button>`](/docs/protocol/elements/button) | Clickable button |
+| [`<ui-input>`](/docs/protocol/elements/input) | Text, number, int, or password input field |
+| [`<ui-select>`](/docs/protocol/elements/select) | Dropdown selector |
+| [`<ui-slider>`](/docs/protocol/elements/slider) | Float or integer slider |
+| [`<ui-checkbox>`](/docs/protocol/elements/checkbox) | Toggle checkbox |
+| [`<ui-textarea>`](/docs/protocol/elements/textarea) | Multi-line text editor |
+| [`<ui-progress>`](/docs/protocol/elements/progress) | Read-only progress bar |
+| [`<ui-color>`](/docs/protocol/elements/color) | Inline color picker |
+| [`<ui-file-select>`](/docs/protocol/elements/file-select) | Native file-open dialog |
+| [`<ui-folder-select>`](/docs/protocol/elements/folder-select) | Native folder-picker dialog |
+| [`<ui-file-save>`](/docs/protocol/elements/file-save) | Native file-save dialog |

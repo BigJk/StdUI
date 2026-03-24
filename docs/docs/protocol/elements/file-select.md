@@ -21,4 +21,4 @@ Renders a read-only path display next to a button. Clicking the button opens a n
 
 ## Event
 
-Emits [`input-changed`](../element-actions#input-changed) with the selected absolute file path as the value.
+Emits [`input-changed`](/docs/protocol/element-actions#input-changed) with the selected absolute file path as the value.

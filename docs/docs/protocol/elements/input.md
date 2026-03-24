@@ -28,4 +28,4 @@ A single-line input field supporting text, number, integer, and password types.
 
 ## Event
 
-Emits [`input-changed`](../element-actions#input-changed) on Enter or focus loss by default, or on every keystroke when `live="true"`.
+Emits [`input-changed`](/docs/protocol/element-actions#input-changed) on Enter or focus loss by default, or on every keystroke when `live="true"`.

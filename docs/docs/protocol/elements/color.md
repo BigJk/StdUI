@@ -21,4 +21,4 @@ An inline color swatch with a hex input field (ImGui `ColorEdit3` / `ColorEdit4`
 
 ## Event
 
-Emits [`input-changed`](../element-actions#input-changed) immediately on every color change. The value is always a lowercase hex string: `#rrggbb` or `#rrggbbaa`.
+Emits [`input-changed`](/docs/protocol/element-actions#input-changed) immediately on every color change. The value is always a lowercase hex string: `#rrggbb` or `#rrggbbaa`.

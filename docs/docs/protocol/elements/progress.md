@@ -4,7 +4,7 @@ sidebar_position: 8
 
 # `<ui-progress>`
 
-A read-only progress bar. The fill fraction is computed as `(value - min) / (max - min)`. Update the value at runtime via [`set-value`](../element-actions#set-value).
+A read-only progress bar. The fill fraction is computed as `(value - min) / (max - min)`. Update the value at runtime via [`set-value`](/docs/protocol/element-actions#set-value).
 
 ```html
 <ui-progress id="upload" value="0.4" min="0" max="1" overlay="40%"></ui-progress>
