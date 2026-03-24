@@ -20,11 +20,6 @@ elseif (MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc")
 endif()
 
-if (EMSCRIPTEN)
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -O3 -s USE_GLFW=3 -s ASSERTIONS=1 -s WASM=1 -s ASYNCIFY -s GL_ENABLE_GET_PROC_ADDRESS=1")
-    set(CMAKE_EXECUTABLE_SUFFIX ".html") # This line is used to set your executable to build with the emscripten html template so that you can directly open it.
-endif ()
-
 # # # # # # # # # # #
 #
 #  | |  / /__  ____  ____/ /___  _____
@@ -32,12 +27,9 @@ endif ()
 #  | |/ /  __/ / / / /_/ / /_/ / /
 #  |___/\___/_/ /_/\__,_/\____/_/
 #
-#  > All Header & Source Files that come from
-#  > external sources or are mostly copy.
+#  > All Header & Source Files that come from external sources.
 #
 
-include_directories(./vendor/GLES2)
-include_directories(./vendor/KHR)
 include_directories(./vendor)
 
 include(FetchContent)
@@ -89,29 +81,29 @@ FetchContent_Declare(
 )
 FetchContent_GetProperties(nativefiledialog)
 if(NOT nativefiledialog_POPULATED)
-  FetchContent_Populate(nativefiledialog)
+    FetchContent_Populate(nativefiledialog)
 endif()
 
 if (APPLE)
-  add_library(nativefiledialog STATIC
+    add_library(nativefiledialog STATIC
     ${nativefiledialog_SOURCE_DIR}/src/nfd_common.c
     ${nativefiledialog_SOURCE_DIR}/src/nfd_cocoa.m
   )
-  target_link_libraries(nativefiledialog "-framework AppKit")
+    target_link_libraries(nativefiledialog "-framework AppKit")
 elseif (WIN32)
-  add_library(nativefiledialog STATIC
+    add_library(nativefiledialog STATIC
     ${nativefiledialog_SOURCE_DIR}/src/nfd_common.c
     ${nativefiledialog_SOURCE_DIR}/src/nfd_win.cpp
   )
 elseif (UNIX)
-  add_library(nativefiledialog STATIC
+    add_library(nativefiledialog STATIC
     ${nativefiledialog_SOURCE_DIR}/src/nfd_common.c
     ${nativefiledialog_SOURCE_DIR}/src/nfd_gtk.c
   )
-  find_package(PkgConfig REQUIRED)
-  pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
-  target_include_directories(nativefiledialog PRIVATE ${GTK3_INCLUDE_DIRS})
-  target_link_libraries(nativefiledialog ${GTK3_LIBRARIES})
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
+    target_include_directories(nativefiledialog PRIVATE ${GTK3_INCLUDE_DIRS})
+    target_link_libraries(nativefiledialog ${GTK3_LIBRARIES})
 endif()
 target_include_directories(nativefiledialog PUBLIC ${nativefiledialog_SOURCE_DIR}/src/include)
 
@@ -143,20 +135,7 @@ add_definitions(-DIMGUI_DEFINE_MATH_OPERATORS)
 #  > Build all the things!
 #
 
-# Find all .cpp files in the src directory
 file(GLOB_RECURSE SOURCES "src/*.cpp")
-
-# Includes
 include_directories(./src/)
-
-# Add the executable
 add_executable(stdui main.cpp ${SOURCES} ${code_vendor_imgui})
-
-# Link dependencies
 target_link_libraries(stdui raylib litehtml hjson nativefiledialog)
-
-if (APPLE)
-    # Link ./libEGL.dylib and ./libGLESv2.dylib
-    target_link_libraries(stdui ${CMAKE_CURRENT_SOURCE_DIR}/libEGL.dylib)
-    target_link_libraries(stdui ${CMAKE_CURRENT_SOURCE_DIR}/libGLESv2.dylib)
-endif()
