@@ -66,8 +66,8 @@ type Settings struct {
 	// BaseFontSize is the base UI font size in pixels. Defaults to 16.0.
 	BaseFontSize *float64 `json:"baseFontSize,omitempty"`
 
-	// SfxVolume is the sound effects volume level (0.0–1.0). Defaults to 1.0.
-	SfxVolume *float64 `json:"sfxVolume,omitempty"`
+	// AudioVolume is the audio volume level (0.0–1.0). Defaults to 1.0.
+	AudioVolume *float64 `json:"audioVolume,omitempty"`
 
 	// TargetFPS is the target frame rate in frames per second. Defaults to 60.
 	TargetFPS *int `json:"targetFps,omitempty"`
