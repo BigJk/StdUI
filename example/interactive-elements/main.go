@@ -5,7 +5,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/BigJk/stdui/sdk/go"
+	stdui "github.com/BigJk/stdui/sdk/go"
 )
 
 // FormState holds the current values of all interactive elements.
@@ -325,7 +325,7 @@ func main() {
 		WindowHeight:   stdui.Ptr(700),
 		Resizable:      stdui.Ptr(true),
 		BaseFontSize:   stdui.Ptr(20.0),
-		SfxVolume:      stdui.Ptr(0.5),
+		AudioVolume:    stdui.Ptr(0.5),
 		FontRegular:    "./assets/fonts/Iosevka-Regular.ttf",
 		FontBold:       "./assets/fonts/Iosevka-Bold.ttf",
 		FontItalic:     "./assets/fonts/Iosevka-Italic.ttf",
