@@ -68,14 +68,6 @@ jobs:
           GIT_TAG: ${{ env.GIT_TAG }}
         run: build_release.bat
 
-      - name: Fetch EGL dylibs from Chromium (macOS)
-        if: matrix.platform == 'macos'
-        run: |
-          brew install --cask ungoogled-chromium
-          LIBS="/Applications/Chromium.app/Contents/Frameworks/Chromium Framework.framework/Versions/Current/Libraries"
-          cp "${LIBS}/libEGL.dylib"    libEGL.dylib
-          cp "${LIBS}/libGLESv2.dylib" libGLESv2.dylib
-
       - name: Configure (macOS / Linux)
         if: matrix.platform != 'windows'
         run: |
@@ -97,16 +89,8 @@ jobs:
           Copy-Item build/Release/stdui.exe release/stdui.exe
           Compress-Archive -Path release/* -DestinationPath stdui-${{ matrix.name }}.zip
 
-      - name: Prepare release assets (macOS)
-        if: matrix.platform == 'macos'
-        run: |
-          mkdir -p release
-          cp libEGL.dylib libGLESv2.dylib release/
-          cp build/stdui release/stdui
-          zip -r "stdui-${{ matrix.name }}.zip" release
-
       - name: Prepare release assets (Linux)
-        if: matrix.platform == 'linux'
+        if: matrix.platform != 'windows'
         run: |
           mkdir -p release
           cp build/stdui release/stdui
