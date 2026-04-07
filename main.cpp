@@ -1,4 +1,6 @@
 #include <cstdarg>
+#include <cstring>
+#include <string>
 
 // Vendor
 #include "action.hpp"
@@ -30,11 +32,42 @@ __declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
 }
 #endif
 
-int main() {
+/**
+ * @brief Parse argv for transport flags and return a TransportConfig.
+ *
+ * Supported flags:
+ *   --socket <path>     Unix domain socket at <path>
+ *   --pipe <path>       Named pipe / FIFO at <path>
+ *
+ * If no flag is present the default StdIO transport is used.
+ *
+ * @param argc Argument count from main().
+ * @param argv Argument vector from main().
+ * @return Configured IO::TransportConfig.
+ */
+static IO::TransportConfig ParseTransportFlags(int argc, char **argv) {
+  IO::TransportConfig cfg;
+  for (int i = 1; i < argc - 1; ++i) {
+    if (std::strcmp(argv[i], "--socket") == 0) {
+      cfg.mode = IO::TransportMode::UnixSocket;
+      cfg.path = argv[i + 1];
+      return cfg;
+    }
+    if (std::strcmp(argv[i], "--pipe") == 0) {
+      cfg.mode = IO::TransportMode::NamedPipe;
+      cfg.path = argv[i + 1];
+      return cfg;
+    }
+  }
+  return cfg;  // default: StdIO
+}
+
+int main(int argc, char **argv) {
   //
-  // Initialize IO subsystem to read from stdin.
+  // Parse CLI flags to select transport mode, then initialize the IO subsystem.
   //
-  IO::Init();
+  IO::TransportConfig transportConfig = ParseTransportFlags(argc, argv);
+  IO::Init(transportConfig);
 
   //
   // Route raylib log messages through the protocol.
