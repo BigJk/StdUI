@@ -5,7 +5,9 @@ sidebar_label: Protocol
 
 # Protocol
 
-StdUI communicates with the controlling application via **stdin/stdout** using line-delimited JSON. Every message is a single line of JSON terminated by a newline character.
+StdUI communicates with the controlling application using line-delimited JSON. Every message is a single line of JSON terminated by a newline character.
+
+By default the channel is **stdin/stdout**, but Unix domain sockets and named pipes are also available — see [IPC Transports](/docs/ipc-transports). The message format is identical regardless of the transport.
 
 ## Message Format
 
