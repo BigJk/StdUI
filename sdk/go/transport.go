@@ -40,11 +40,12 @@ func StartWithSocket(binaryPath string, socketPath string, settings Settings) (*
 }
 
 // StartWithNamedPipe spawns the stdui binary with the --pipe flag, waits for
-// it to create the named pipe / FIFO, connects to it, sends the initial
-// settings, and begins reading events.
+// it to create the named pipe, connects to it, sends the initial settings,
+// and begins reading events.
 //
-// On Unix, pipePath is the filesystem path of the FIFO to create,
-// e.g. "/tmp/myapp.pipe".
+// On Unix/macOS, pipePath is the filesystem path of the Unix domain socket
+// that stdui creates as the pipe backend, e.g. "/tmp/myapp.pipe". FIFOs are
+// not used because they cannot carry bidirectional IPC reliably.
 //
 // On Windows, pipePath must be a valid Windows named-pipe path of the form
 // \\.\pipe\<name>, e.g. `\\.\pipe\myapp`.
