@@ -55,7 +55,7 @@ FetchContent_MakeAvailable(hjson)
 FetchContent_Declare(
   litehtml
   GIT_REPOSITORY https://github.com/litehtml/litehtml.git
-  GIT_TAG d4453f5d4e03cd4d902b867ca553d0ad81b09939 # I had some problems with the latest version, so I used this one
+  GIT_TAG 8836bc1bc35ca0cfd71dc0386ef841d5cbc3bd5e
 )
 set(LITEHTML_BUILD_TESTING OFF CACHE BOOL "Skip building tests" FORCE)
 FetchContent_MakeAvailable(litehtml)

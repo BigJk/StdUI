@@ -144,10 +144,10 @@ int main(int argc, char **argv) {
     return ImHTML::ImageMeta{tex->width, tex->height};
   };
   conf->GetImageTexture = [](const char *url, const char *) { return (ImTextureID)TextureCache::GetPtr(url); };
-  conf->FontRegular = UI::Style::GetFont(UI::Style::FontStyle::Regular);
-  conf->FontBold = UI::Style::GetFont(UI::Style::FontStyle::Bold);
-  conf->FontItalic = UI::Style::GetFont(UI::Style::FontStyle::Italic);
-  conf->FontBoldItalic = UI::Style::GetFont(UI::Style::FontStyle::BoldItalic);
+  conf->DefaultFont.Regular = UI::Style::GetFont(UI::Style::FontStyle::Regular);
+  conf->DefaultFont.Bold = UI::Style::GetFont(UI::Style::FontStyle::Bold);
+  conf->DefaultFont.Italic = UI::Style::GetFont(UI::Style::FontStyle::Italic);
+  conf->DefaultFont.BoldItalic = UI::Style::GetFont(UI::Style::FontStyle::BoldItalic);
 
   //
   // Notify the controlling process that stdui is fully initialized and
