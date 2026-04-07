@@ -37,7 +37,7 @@ __declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
  *
  * Supported flags:
  *   --socket <path>     Unix domain socket at <path>
- *   --pipe <path>       Named pipe / FIFO at <path>
+ *   --pipe <path>       Named pipe at <path> (Unix domain socket on non-Windows)
  *
  * If no flag is present the default StdIO transport is used.
  *
