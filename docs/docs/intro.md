@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Introduction
 
-StdUI is a lightweight cross-platform UI engine that can be used with any programming language. It spawns as a child process and communicates with your application via stdin/stdout using newline-delimited JSON. This allows easy integration with any language that can start a process and read/write pipes.
+StdUI is a lightweight cross-platform UI engine that can be used with any programming language. It spawns as a child process and communicates with your application via newline-delimited JSON. By default it uses stdin/stdout, but Unix domain sockets and named pipes are also supported for cases where subprocess pipes are inconvenient.
 
 :::warning
 This project is experimental. Expect bugs, missing features, and breaking changes. The API is not stable and may change without deprecation.
@@ -14,8 +14,9 @@ This project is experimental. Expect bugs, missing features, and breaking change
 
 ```
 Your App (Go, Python, anything)
-        │  stdin  → JSON commands
-        │  stdout ← JSON events
+        │  JSON commands  →
+        │  ← JSON events
+        │  (stdin/stdout, Unix socket, or named pipe)
         ▼
    stdui binary (C++)
    ┌──────────────────────────────┐
@@ -31,7 +32,7 @@ StdUI uses a reduced subset of HTML/CSS (via [litehtml](https://github.com/liteh
 ## Features
 
 - Cross-platform (Windows, macOS, Linux)
-- Language agnostic (communicates via stdin/stdout)
+- Language agnostic (communicates via stdin/stdout, Unix sockets, or named pipes)
 - Supports a reduced subset of HTML/CSS for layout and styling
 - Pane-based layout system
 - Interactive widgets: buttons, text/number/password inputs, checkboxes, sliders, progress bars, color picker

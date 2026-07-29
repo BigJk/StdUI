@@ -18,7 +18,7 @@ The goal is to provide a simple way to build native desktop applications with si
 ## Features
 
 - Cross-platform (Windows, macOS, Linux)
-- Language agnostic (communicates via stdin/stdout)
+- Language agnostic (communicates via stdin/stdout, Unix sockets, or named pipes)
 - Supports a reduced sub-set of HTML/CSS for UI layouting and styling
 - Pane-based layout system
 - Interactive widgets:
@@ -58,6 +58,7 @@ The goal is to provide a simple way to build native desktop applications with si
 - [Todo List](./example/todo): Simple todo list app
 - [Chat](./example/chat): Simple chat interface with message input and display (no real networking, just simulates a conversation)
 - [IRC Client](./example/irc): A working, but simple IRC client
+- [IPC Transports](./example/ipc): Demonstrates connecting via Unix domain socket or named pipe instead of stdin/stdout
 
 All these examples are based on the Go SDK.
 
@@ -67,12 +68,13 @@ This uses litehtml for html/css layouting. This means that only a reduced sub-se
 
 ## Usage
 
-stdui is a **compiled C++ binary** that opens a native OS window and renders HTML with interactive widgets. Your application controls it by spawning it as a child process and exchanging **newline-delimited JSON** over stdin/stdout. Any language that can start a process and read/write pipes can drive it.
+stdui is a **compiled C++ binary** that opens a native OS window and renders HTML with interactive widgets. Your application controls it by spawning it as a child process and exchanging **newline-delimited JSON**. By default communication uses stdin/stdout; Unix domain sockets and named pipes are also supported. Any language that can start a process and read/write pipes (or connect to a socket) can drive it.
 
 ```
 Your App (Go, Python, anything)
-        │  stdin  → JSON commands
-        │  stdout ← JSON events
+        │  JSON commands  →
+        │  ← JSON events
+        │  (stdin/stdout, Unix socket, or named pipe)
         ▼
    stdui binary (C++)
    ┌-----------------------------─┐
@@ -165,6 +167,22 @@ stdui → You   {"action":"window-closed"}
 ```
 
 That's the entire model. Every interaction follows this same pattern: send action, receive events, send new action.
+
+### Alternative Transports
+
+By default stdui reads/writes via stdin/stdout. You can also connect over a **Unix domain socket** or a **named pipe** (Windows named pipe on Windows, Unix domain socket alias on Unix/macOS) by passing a CLI flag when spawning the binary:
+
+```sh
+# Unix / macOS
+./stdui --socket /tmp/myapp.sock   # Unix domain socket
+./stdui --pipe   /tmp/myapp.pipe   # named pipe (alias for Unix domain socket)
+
+# Windows
+stdui.exe --socket /tmp/myapp.sock      # Unix domain socket (Windows 10 1803+)
+stdui.exe --pipe   \\.\pipe\myapp       # Windows named pipe
+```
+
+stdui creates the socket/pipe file itself. You do not need to create it beforehand. The Go SDK exposes `StartWithSocket` and `StartWithNamedPipe` as drop-in replacements for `Start`. See the [IPC example](./example/ipc) and the [IPC Transports docs](https://bigjk.github.io/StdUI/docs/ipc-transports) for details.
 
 **You can learn more about the protocol in the [protocol specification](./PROTOCOL.md).**
 

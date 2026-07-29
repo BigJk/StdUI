@@ -3,6 +3,7 @@ go 1.25.5
 use (
 	./example/chat
 	./example/interactive-elements
+	./example/ipc
 	./example/irc
 	./example/simple
 	./example/todo
